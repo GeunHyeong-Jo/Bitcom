@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias type="com.saltlux.bitcom.vo.UserVo" alias="uservo"/>
+		<typeAlias type="com.saltlux.bitcom.vo.BoardVo" alias="boardvo"/>
+		<typeAlias type="com.saltlux.bitcom.vo.OrdersDetailVo" alias="ordersdetailvo"/>
+		<typeAlias type="com.saltlux.bitcom.vo.OrdersVo" alias="ordersvo"/>
+		<typeAlias type="com.saltlux.bitcom.vo.ProductVo" alias="productvo"/>
+		<typeAlias type="com.saltlux.bitcom.vo.CartVo" alias="cartvo"/>
+		<typeAlias type="com.saltlux.bitcom.vo.join.CartJoinProductVo" alias="cartjoinproductvo"/>
+		<typeAlias type="com.saltlux.bitcom.vo.join.OrdersDetailJoinProductVo" alias="ordersdetailjoinproductvo"/>
+	</typeAliases>
+	<mappers>
+		<mapper resource="mybatis/mappers/user.xml" />
+		<mapper resource="mybatis/mappers/board.xml" />
+		<mapper resource="mybatis/mappers/orders.xml" />
+		<mapper resource="mybatis/mappers/cart.xml" />
+		<mapper resource="mybatis/mappers/product.xml" />
+	</mappers>
+</configuration>

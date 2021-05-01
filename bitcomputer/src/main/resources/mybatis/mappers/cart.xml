@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cart">
+
+	<insert id="addcart" parameterType="map">
+		<![CDATA[
+			insert into cart (uID, pNO, cQTY) values (#{userid }, #{pno }, #{qty })
+		]]>
+	</insert>
+		<!-- INSERT INTO `bitcom`.`cart` (`uID`, `pNO`, `cQTY`) VALUES ('test1', '1', '1'); -->
+
+	<select id="findall" parameterType="string" resultType="cartjoinproductvo">
+		<![CDATA[	
+		SELECT *  FROM cart LEFT JOIN product ON cart.pNO = product.pNO WHERE uID= #{uid }  ORDER BY product.pCATEGORY
+		]]>
+		<!-- select * from cart where uID = #{uid } -->
+	</select>
+	
+	<delete id="deletecart" parameterType="map">
+		<![CDATA[
+			DELETE FROM cart WHERE  cID=#{cid} AND uID=#{uid };
+		]]>
+	</delete>
+	
+	<select id="getallprice" parameterType="string" resultType="string">
+		<![CDATA[	
+			SELECT sum(pPRICE) FROM cart LEFT JOIN product ON cart.pNO = product.pNO WHERE uID = #{uid}
+		]]>
+		<!-- SELECT sum(pPRICE)  FROM cart LEFT JOIN product ON cart.pNO = product.pNO WHERE uid='test1' -->
+	</select>
+	
+</mapper>

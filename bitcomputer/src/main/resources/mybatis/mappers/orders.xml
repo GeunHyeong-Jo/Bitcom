@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="orders">
+	
+	
+	<insert id="makeallorder" parameterType="ordersvo">
+		<![CDATA[
+			insert into orders (uID, oADDRESS, oDATE, oNAME, oPOST, oTOTAL, oPHONE) values (#{uid }, #{oaddress },now() ,#{oname }, #{opost }, #{ototal }, #{ophone })
+		]]>
+	</insert>
+	<select id="getAllOrders" parameterType="string" resultType="ordersvo">
+		<![CDATA[
+			SELECT * FROM orders WHERE uID=#{uid }
+		]]>
+	</select>
+	<select id="getAllDetails" parameterType="string" resultType="ordersdetailjoinproductvo">
+		<![CDATA[
+			SELECT * FROM orders_detail LEFT JOIN product on product.pNO = orders_detail.pNO WHERE uid=#{uid } ORDER BY oNO AND pCATEGORY;
+		]]>
+	</select>
+	<delete id="cancelOrder" parameterType="string">
+		<![CDATA[
+			DELETE FROM orders WHERE orders.oNO = #{ono }
+		]]>
+	</delete>
+	
+</mapper>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="user">
+
+	<insert id="signup" parameterType="uservo">
+		<![CDATA[ 
+			insert into user (uID, uPASSWORD, uNAME, uPHONE, uEMAIL, uADDRESS, uRDATE, uPOST) values 
+			( #{uid } , #{upassword}, #{uname} ,#{uphone}, #{uemail}, #{uaddress}, now(), #{upost} )
+		]]>
+	</insert>
+
+	<select id="find" parameterType="long" resultType="uservo">
+	<![CDATA[ 
+		SELECT name, email, gender FROM user WHERE no=#{no }
+	]]>
+	</select>
+
+
+	<select id="findByIdAndPassword" parameterType="uservo"	resultType="uservo">
+		<![CDATA[ 
+			select * from user where uID = #{uid } and uPASSWORD = #{upassword }
+		]]>
+	</select>
+
+	<select id="findById" parameterType="string" resultType="uservo">
+		<![CDATA[ 
+			select * from user where uID = #{uid }
+		]]>
+	</select>
+
+	<update id="updateinfo"  parameterType="uservo">
+		<![CDATA[ 
+			update user set uPASSWORD=#{upassword }, uNAME=#{uname } ,uPHONE=#{uphone }, uEMAIL=#{uemail }, uADDRESS=#{uaddress }, uPOST=#{upost } where uID = #{uid }
+		]]>
+	</update>
+
+</mapper>
