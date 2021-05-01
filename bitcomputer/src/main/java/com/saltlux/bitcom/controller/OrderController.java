@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.saltlux.bitcom.security.Auth;
 import com.saltlux.bitcom.security.AuthUser;
+import com.saltlux.bitcom.service.CartService;
 import com.saltlux.bitcom.service.OrderService;
 import com.saltlux.bitcom.vo.OrdersVo;
 import com.saltlux.bitcom.vo.UserVo;
+import com.saltlux.bitcom.vo.join.CartJoinProductVo;
 import com.saltlux.bitcom.vo.join.OrdersDetailJoinProductVo;
 
 @Controller
@@ -22,17 +24,14 @@ public class OrderController {
 
 	@Autowired
 	private OrderService orderService;
-
-	@Auth
-	@RequestMapping
-	public String order() {
-
-		return "forward:/";
-	}
-
+	@Autowired
+	private CartService cartService;
+	
 	@Auth
 	@RequestMapping("/make")
-	public String makeOrder() {
+	public String makeOrder(@AuthUser UserVo authUser,Model model) {
+		List<CartJoinProductVo> list = cartService.findall(authUser.getUid());
+		model.addAttribute("cartList", list);
 		return "order/order";
 	}
 
@@ -67,7 +66,7 @@ public class OrderController {
 	public String cancel(@AuthUser UserVo authUser, HttpServletRequest request) { // 주문조회
 		String ono= request.getParameter("ono");
 		orderService.cancelOrder(ono);
-		return "redirect: order/inquiry";
+		return "redirect:order/inquiry";
 	}
 	
 }

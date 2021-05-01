@@ -96,6 +96,7 @@
 						<legend>약관동의</legend>
 							<input id="agree-prov" type="checkbox" name="agreeProv" value="y">
 							<label>서비스 약관에 동의합니다.</label>
+							<p>회원은 모든 권리를 요구할수 없습니다</p>
 					</fieldset> 
 					<input type="submit" value="가입하기">
 				</form>
