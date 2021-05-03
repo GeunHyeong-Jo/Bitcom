@@ -44,15 +44,16 @@ public class UserController {
 	public String update(@AuthUser UserVo authUser, Model model) {
 		String id = authUser.getUid();
 		UserVo userVo = userService.getUser(id);
-		model.addAttribute("userVo", userVo);
+		model.addAttribute("uservo", userVo);
 		
-		return "user/update";
+		return "/user/update";
 	}
 	@Auth
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public String update(@AuthUser UserVo authUser, UserVo vo) {
 
 		String id = authUser.getUid();
+		System.out.println(vo);
 		vo.setUid(id);
 		userService.updateUser(vo);
 

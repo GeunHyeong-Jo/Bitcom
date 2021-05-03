@@ -41,5 +41,9 @@ public class CartReopsitory {
 		return sqlsession.selectOne("cart.getallprice", uid);
 	}
 
+	public int isInCart(String pno) {
+		return sqlsession.selectOne("cart.isproductin", pno);
+	}
+
 	
 }

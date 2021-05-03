@@ -1,6 +1,7 @@
 package com.saltlux.bitcom.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,24 +18,46 @@ public class OrderService {
 	private OrderRepository orderRepository;
 	@Autowired
 	private CartReopsitory cartReopsitory;
-	
+
 	public void putAllOrder(OrdersVo vo) {
-		String total = cartReopsitory.getAllPrice(vo.getUid());//장바구니의 총 금액을 계산
-		vo.setOtotal(Integer.parseInt(total)); //장바구니의 총 금액을 추가
+		String total = cartReopsitory.getAllPrice(vo.getUid());// 장바구니의 총 금액을 계산
+		vo.setOtotal(Integer.parseInt(total)); // 장바구니의 총 금액을 추가
 		orderRepository.putAllOrder(vo);// orders테이블에 추가
-		//트리거를 이용하여 ordersdetail을 추가하고 장바구니내용을 비운다
+		// 트리거를 이용하여 ordersdetail을 추가하고 장바구니내용을 비운다
 	}
 
 	public List<OrdersVo> getAllOrder(String uid) {
 		return orderRepository.getAllOrder(uid);
 	}
 
+	public List<OrdersVo> getAllOrder() {
+		return orderRepository.getAllOrder();
+	}
+
 	public List<OrdersDetailJoinProductVo> getAllDetail(String uid) {
 		return orderRepository.getAllDetail(uid);
+	}
+	public List<OrdersDetailJoinProductVo> getAllDetail() {
+		return orderRepository.getAllDetail();
 	}
 
 	public void cancelOrder(String ono) {
 		orderRepository.cancelOrder(ono);
 	}
+
+	public boolean isInOrderDetail(String pno) {
+		int count = orderRepository.isInOrderDetail(pno);
+		if (count == 0)
+			return false;
+		else
+			return true;
+	}
+
+	public void changeOrder(Map<String, String> map) {
+		orderRepository.changeOrder(map);
+	}
+
+	
+
 
 }

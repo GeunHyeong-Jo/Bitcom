@@ -34,7 +34,7 @@
 			</bean>
 
 		</mvc:message-converters>
-		<!-- argument resolver : AuthUser를 이용하기 위해-->
+		<!-- argument resolver : AuthUser를 이용하기 위해 -->
 		<mvc:argument-resolvers>
 			<bean
 				class="com.saltlux.bitcom.security.AuthUserHandlerMethodArgumentResolver" />
@@ -45,7 +45,11 @@
 
 	<!-- Interceptors -->
 	<mvc:interceptors>
-
+		<mvc:interceptor>
+			<mvc:mapping path="/product/admin" />
+			<mvc:mapping path="/order/admin" />
+			<bean class="com.saltlux.bitcom.security.AdminInterceptor" />
+		</mvc:interceptor>
 		<mvc:interceptor>
 			<mvc:mapping path="/user/auth" />
 			<bean class="com.saltlux.bitcom.security.LoginInterceptor" />
@@ -56,15 +60,18 @@
 		</mvc:interceptor>
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />
-			<mvc:exclude-mapping path="/assets/**" /><!-- 해당하는 경로를 제외시킨다 -->
+			<mvc:exclude-mapping path="/assets/**" /><!-- 해당하는 
+				경로를 제외시킨다 -->
 			<mvc:exclude-mapping path="/user/auth" />
 			<mvc:exclude-mapping path="/user/logout" />
+			<mvc:exclude-mapping path="/product/admin" />
+			<mvc:exclude-mapping path="/order/admin" />
 			<bean class="com.saltlux.bitcom.security.AuthInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
 
 
-<!-- 서블릿 컨테이너의 디폴트 서블릿 위임 핸들러 -->
+	<!-- 서블릿 컨테이너의 디폴트 서블릿 위임 핸들러 -->
 	<mvc:default-servlet-handler />
 
 	<!-- ViewResolver 설정 : 렌더링 -->
@@ -79,7 +86,18 @@
 	</bean>
 
 	<context:annotation-config />
-	<context:component-scan	base-package="com.saltlux.bitcom.controller, com.saltlux.bitcom.exception" />
+	<context:component-scan
+		base-package="com.saltlux.bitcom.controller, com.saltlux.bitcom.exception" />
 
+
+	<!-- 파일업로드에 필요한 bean -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- 파일 업로드 용량 -->
+		<property name="maxUploadSize" value="10485760"></property>
+	</bean>	
+	<!-- 파일업로드 디렉토리 설정 -->
+	<bean id="uploadPath" class="java.lang.String">
+		<constructor-arg value="C:/Users/jgh03/JavaFullStack/bitcom/bitcomputer/src/main/webapp/assets/images/product" />
+	</bean>
 
 </beans> 

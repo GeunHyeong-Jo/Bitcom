@@ -11,7 +11,7 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <meta name="description" content="" />
 <meta name="author" content="" />
-<title>BitComputer - 컴퓨터는 역시 비트컴퓨터!!</title>
+<title>관리자 메뉴</title>
 <!-- Favicon-->
 <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 <!-- Core theme CSS (includes Bootstrap)-->
@@ -37,75 +37,26 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-3">
-				<h1 class="my-4">주문하기</h1>
+				<h1 class="my-4">비트컴퓨터</h1>
 				<div class="list-group">
 					<c:import url="/WEB-INF/views/includes/category.jsp" />
 				</div>
 			</div>
 			<div class="col-lg-9">
 				<div class="card card-outline-secondary my-4">
-					<div class="card-header">장바구니에 담긴 상품</div>
+					<div class="card-header">상품 삭제 실패</div>
 					<div class="card-body">
-
-						<table border="1">
-							<tr>
-								<th>카테고리</th>
-								<th>제품명</th>
-								<th>가격</th>
-								<th>갯수</th>
-								<th>총금액</th>
-							</tr>
-
-							<c:forEach var="cart" items="${cartList }">
-								<tr>
-									<td>${cart.pcategory }</td>
-									<td>${cart.pname }</td>
-									<td>${cart.pprice }</td>
-									<td>${cart.cqty }</td>
-									<td>${cart.cqty * cart.pprice }</td>
-								</tr>
-							</c:forEach>
-						</table>
-						<!-- 상품정보 -->
-						<hr/>
-						<small class="text-muted">주문한 물품과 수량을 확인하세요</small>
-						
-
+						<!--   안내 메시지      -->
+							<h3>삭제 불가능!!</h3>
+							<p>주문중인 상품이므로 삭제가 불가능합니다
+							   <br/>나중에 다시 시도하세요</p>
+							   <button class="btn btn-lg btn-primary btn-block" type="button" onclick="location.href='${pageContext.request.contextPath }/product/admin'">돌아가기</button>
+						<!--                -->
 					</div>
 				</div>
-				<div class="card mt-4">
-					<div class="card-body">
-						<h3 class="card-title">주문하기</h3>
-						<br />
-						<h5>주문자 정보</h5>
-						<form action="${pageContext.request.contextPath }/order/putorder"
-							method="post">
-							<table border="1">
-								<tr>
-									<th>받으시는분</th>
-									<th>전화번호</th>
-									<th>주소</th>
-									<th>우편번호</th>
-								</tr>
-								<tr>
-									<td><input id="name" name="name"
-										value="${authUser.uname }"></td>
-									<td><input id="phone" name="phone"
-										value="${authUser.uphone }"></td>
-									<td><input id="address" name="address"
-										value="${authUser.uaddress }"></td>
-									<td><input id="post" name="post"
-										value="${authUser.upost }"></td>
-								</tr>
-
-
-
-							</table>
-							<label for="usemydata">회원가입시 입력한 정보 사용</label> <input
-								id="usemydata" type="checkbox"><br/><hr/> 
-								<input class="btn btn-success" type="submit" id="submit" value="주문하기">
-						</form>
-					</div>
+				<div class="row">
+					<!-- 제품출력 -->
+					<c:import url="/WEB-INF/views/product/admindisplay.jsp" />
 				</div>
 			</div>
 		</div>

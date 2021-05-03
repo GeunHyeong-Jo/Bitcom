@@ -24,10 +24,11 @@
 					</p>
 					<form action="cart/addcart?pno=${productVo.pno}" method="post">
 						<label class="block-label" for="qty">수량선택</label>
-						<input id="qty" name="qty" type="number" value="1">
+						<input id="qty" name="qty" type="number" min="1" value="1">
 						<input type="submit" value="장바구니에 추가">
 					</form>
 				</div>
+				
 			</div>
 		</div>
 	</c:forEach>

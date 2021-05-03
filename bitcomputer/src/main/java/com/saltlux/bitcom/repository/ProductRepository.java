@@ -25,6 +25,16 @@ public class ProductRepository {
 	public List<ProductVo> findCategory(String category) {
 		return sqlSession.selectList("product.findcategory", category);
 	}
+
+	public void addProduct(ProductVo vo) {
+		sqlSession.insert("product.addproduct", vo);
+		
+	}
+
+	public void deleteProduct(String no) {
+		sqlSession.delete("product.deleteproduct", no);
+		
+	}
 	
 
 }

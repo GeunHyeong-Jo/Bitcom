@@ -12,7 +12,7 @@
 <body>
 	<footer class="py-5 bg-dark">
 		<div class="container">
-			<p class="m-0 text-center text-white">Copyright &copy; 조근형 2021</p>
+			<p class="m-0 text-center text-white">Copyright &copy; 조근형 2021  문의 : 010-0000-0000 </p>
 		</div>
 	</footer>
 </body>

@@ -29,4 +29,9 @@
 		<!-- SELECT sum(pPRICE)  FROM cart LEFT JOIN product ON cart.pNO = product.pNO WHERE uid='test1' -->
 	</select>
 	
+	<select id="isproductin" parameterType="string" resultType="int">
+		<![CDATA[	
+			SELECT count(*) FROM cart WHERE pNO = #{pno }
+		]]>
+	</select>
 </mapper>

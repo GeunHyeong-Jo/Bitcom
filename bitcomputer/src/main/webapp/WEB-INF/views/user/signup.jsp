@@ -6,102 +6,128 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>mysite</title>
-<meta http-equiv="content-type" content="text/html; charset=utf-8">
-<!-- <link href="${pageContext.request.contextPath }/assets/css/user.css" rel="stylesheet" type="text/css"> -->
-<script
-	src="${pageContext.request.contextPath }/assets/js/jquery/jquery-3.6.0.js"
-	type="text/javascript"></script>
-<script>
-	$(function(){
-		$("#id").change(function(){
-			$('#img-id').hide();
-			$("#btn-id").show();
-		});
-		
-		$("#btn-id").click(function(){
-			const id = $("#id").val();
-			if(id ==''){
-				return;
-			}
-				$.ajax({
-					url : "/bitcom/api/user/existid?id=" + id,
-					async : true,
-					data : '',
-					dataType: 'json',
-					success: function(response){
-						if(response.result != 'success'){
-							console.error(response.message);
-							return;
-						}
-						if(response.data == true){
-							alert('이미 존재하는 아이디입니다.');
-							$("#id")
-								.val('')
-								.focus();
-							return;
-						}
-						$('#img-id').show();
-						$("#btn-id").hide();
-					},
-					error: function(xhr, status, e){
-						console.error(status + ":"+ e);	
-						
-					}
-				});
-			});
-		});
-	
-</script>
+<meta charset="utf-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+<title>BitComputer - 회원가입</title>
+<!-- Favicon-->
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+<!-- Core theme CSS (includes Bootstrap)-->
+<link href="${pageContext.request.contextPath}/css/signup.css"
+	rel="stylesheet" />
 </head>
 <body>
-	<div id="container">
-		<div id="content">
-			<div id="user">
-				<form id="join-form" name="joinForm" method="post"
-					action="${pageContext.request.contextPath }/user/signup">
+	<div id="fullscreen_bg" class="fullscreen_bg">
+		<form class="form-signin" id="join-form" name="joinForm" method="post"
+			action="${pageContext.request.contextPath }/user/signup">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-4 col-md-offset-4">
+						<div class="panel panel-default">
+							<div class="panel panel-primary">
 
-					<label class="block-label" for="id">사용할 ID</label> 
-					<input id="uid"	name="uid" type="text" value="">
-					
-					<img id="img-id" style="width: 16px; display: none" src="${pageContext.request.contextPath }/assets/images/check.png">
-					<input id="btn-id" type="button" value="중복체크">
-					<br/>
-					<label class="block-label">패스워드</label> 
-					<input name="upassword"	type="password" value="">
-					<label class="block-label">패스워드 확인</label> 
-					<input name="password-check" type="password" value="">
-					<img id="img-check" style="width: 16px; display: none" src="${pageContext.request.contextPath }/assets/images/check.png">
-					<br/>
-					<label class="block-label" for="name">이름</label> 
-					<input id="uname" name="uname" type="text" value=""> 
-					<br/>
-					<label class="block-label" for="uemail">이메일</label> 
-					<input id="uinput-email" name="uemail" type="text" value=""> 
-					<img id="img-check" style="width: 16px; display: none" src="${pageContext.request.contextPath }/assets/images/check.png">
-					<input id="btn-check" type="button" value="중복체크">
-					
-					<br/>
-					<label class="block-label" for="uphone">휴대전화번호</label> 
-					<input id="uphone" name="uphone" type="text" value=""> 
-					<br/>
-					
-					<label class="block-label" for="uaddress">주소</label>
-					<input id="uaddress" name="uaddress" type="text" value="">
-					<label class="block-label" for="upost">우편번호</label>
-					<input id="upost"  name="upost" type="text" value="">
-					<br/>
-					
-					<fieldset>
-						<legend>약관동의</legend>
-							<input id="agree-prov" type="checkbox" name="agreeProv" value="y">
-							<label>서비스 약관에 동의합니다.</label>
-							<p>회원은 모든 권리를 요구할수 없습니다</p>
-					</fieldset> 
-					<input type="submit" value="가입하기">
-				</form>
+								<h3 class="text-center">회원정보를 입력하세요</h3>
+
+								<div class="panel-body">
+
+									<div class="form-group">
+										<div class="input-group">
+											<span class="input-group-addon"><span
+												class="glyphicon glyphicon-user"></span> </span> <input type="text"
+												class="form-control" placeholder=" User ID" id="uid"
+												name="uid" />
+										</div>
+										<img id="img-id" style="width: 16px; display: none"
+											src="${pageContext.request.contextPath }/assets/images/check.png">
+										<input id="btn-id" type="button" value="중복체크">
+									</div>
+									<!-- 아이디 -->
+									<div class="form-group">
+										<div class="input-group">
+											<span class="input-group-addon"><span
+												class="glyphicon glyphicon-lock"></span></span> <input
+												type="password" class="form-control" name="password"
+												placeholder="Password" />
+										</div>
+									</div>
+
+									<div class="form-group">
+										<div class="input-group">
+											<span class="input-group-addon"><span
+												class="glyphicon glyphicon-lock"></span></span> <input
+												type="password" class="form-control" name="password-check"
+												placeholder="Password Check" />
+										</div>
+									</div>
+
+									<img id="img-pw" style="width: 16px; display: none"
+										src="${pageContext.request.contextPath }/assets/images/check.png">
+									<!-- 비밀번호 -->
+									<div class="form-group">
+										<div class="input-group">
+											<span class="input-group-addon"><span
+												class="glyphicon glyphicon-user"></span></span> <input type="text"
+												id="uname" name="uname" class="form-control"
+												placeholder="Name" />
+										</div>
+									</div>
+									<!-- 이름 -->
+									<div class="form-group">
+										<div class="input-group">
+											<span class="input-group-addon"><span
+												class="glyphicon glyphicon-envelope"></span></span> <input
+												id="uinput-email" name="uemail" type="text"
+												class="form-control" placeholder="Email" />
+										</div>
+									</div>
+									<!-- 이메일 -->
+
+									<div class="form-group">
+										<div class="input-group">
+											<span class="input-group-addon"><span
+												class="glyphicon glyphicon-user"></span> </span> <input type="text"
+												class="form-control" placeholder=" Phone " id="uphone"
+												name="uphone" />
+										</div>
+									</div>
+									<!-- 휴대전화번호 -->
+
+									<div class="form-group">
+										<div class="input-group">
+											<span class="input-group-addon"> <span
+												class="glyphicon glyphicon-home"></span></span> <input type="text"
+												class="form-control" placeholder="Address" id="uaddress"
+												name="uaddress" />
+										</div>
+									</div>
+									<!-- 주소 -->
+									<div class="form-group">
+										<div class="input-group">
+											<span class="input-group-addon"> <span
+												class="glyphicon glyphicon-home"></span></span> <input type="text"
+												class="form-control" placeholder="Postal code" id="upost"
+												name="upost" />
+										</div>
+									</div>
+									<!-- 우편번호 -->
+									<button class="btn btn-lg btn-primary btn-block" type="submit">가입하기</button>
+									<button class="btn btn-lg btn-primary btn-block" type="button" onclick="location.href='${pageContext.request.contextPath }'">돌아가기</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
-		</div>
+		</form>
 	</div>
+
 </body>
+<link
+	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
+	rel="stylesheet" id="bootstrap-css">
+<script
+	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 </html>

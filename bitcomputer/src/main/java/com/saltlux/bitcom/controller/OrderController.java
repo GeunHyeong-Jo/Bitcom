@@ -1,6 +1,8 @@
 package com.saltlux.bitcom.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -8,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.saltlux.bitcom.security.Admin;
 import com.saltlux.bitcom.security.Auth;
 import com.saltlux.bitcom.security.AuthUser;
 import com.saltlux.bitcom.service.CartService;
@@ -69,4 +73,35 @@ public class OrderController {
 		return "redirect:order/inquiry";
 	}
 	
+	@Admin
+	@RequestMapping("/admin")
+	public String admin(@AuthUser UserVo authUser, Model model) { // 관리자주문조회
+		
+		List<OrdersVo> orderlist = orderService.getAllOrder();
+		List<OrdersDetailJoinProductVo> detaillist =orderService.getAllDetail();
+		model.addAttribute("orderlist", orderlist);
+		model.addAttribute("detaillist", detaillist);
+		
+		return "order/manage";
+	}
+	@Admin
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public String delete(HttpServletRequest request) { // 관리자주문조회
+		String ono=request.getParameter("ono");
+		orderService.cancelOrder(ono);
+		
+		return "redirect:/order/admin";
+	}
+	
+	@Admin
+	@RequestMapping(value = "/change", method = RequestMethod.POST)
+	public String change(HttpServletRequest request) { // 관리자주문조
+		String no = (String) request.getParameter("no");
+		String state = (String) request.getParameter("state");
+		Map<String , String> map= new HashMap<>();
+		map.put("state", state);
+		map.put("no", no);
+		orderService.changeOrder(map);
+		return "redirect:/order/admin";
+	}
 }

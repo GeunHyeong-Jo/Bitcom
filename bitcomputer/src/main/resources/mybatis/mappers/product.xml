@@ -19,4 +19,19 @@
 			select * from product where pCATEGORY=#{category }
 		]]>
 	</select>
+	
+	
+	<insert id="addproduct" parameterType="productvo">
+		<![CDATA[ 
+			insert into product(pCATEGORY, pNAME, pPRICE, pMANUFACTURER, pSOCKET, pCONTENT, pIMAGE, pQTY) values (#{pcategory }, #{pname },#{pprice },#{pmanufacturer },#{psocket },#{pcontent },#{pimage }, #{pqty })
+		]]>
+	</insert>
+	
+	
+	<delete id="deleteproduct" parameterType="string">
+		<![CDATA[ 
+			delete from product where pNO=#{pno }
+		]]>
+	</delete>
+	
 </mapper>

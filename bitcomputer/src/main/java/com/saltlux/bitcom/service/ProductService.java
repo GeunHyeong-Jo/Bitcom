@@ -29,5 +29,15 @@ public class ProductService {
 		List<ProductVo> list = productRepository.findCategory(category);
 		return list;
 	}
+
+	public void addProduct(ProductVo vo) {
+		productRepository.addProduct(vo);
+	}
+
+	public void deleteProduct(String no) {
+		productRepository.deleteProduct(no);
+		
+	}
+
 	
 }
