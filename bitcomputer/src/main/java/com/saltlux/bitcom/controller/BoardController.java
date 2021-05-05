@@ -7,6 +7,7 @@ import com.saltlux.bitcom.service.BoardService;
 
 @Controller
 public class BoardController {
+	@SuppressWarnings("unused")
 	@Autowired
 	private BoardService boardService;
 }

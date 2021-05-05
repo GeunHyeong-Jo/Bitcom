@@ -9,54 +9,39 @@
 <script
 	src="${pageContext.request.contextPath }/assets/js/jquery/jquery-3.6.0.js"
 	type="text/javascript"></script>
-<script>
-	$(function() {
-		$("#input-email").change(function() {
-			$('#img-check').hide();
-			$("#btn-check").show();
-		});
-
-		$("#btn-check").click(function() {
-			const email = $("#input-email").val();
-			if (email == '') {
-				return;
-			}
-			$.ajax({
-				url : "/bitcom/api/user/existemail?email=" + email,
-				async : true,
-				data : '',
-				dataType : 'json',
-				success : function(response) {
-					if (response.result != 'success') {
-						console.error(response.message);
-						return;
-					}
-					if (response.data == true) {
-						alert('이미 존재하는 이메일입니다. 다른 이메일을 사용해 주세요');
-						$("#input-email").val('').focus();
-						return;
-					}
-					$('#img-check').show();
-					$("#btn-check").hide();
-				},
-				error : function(xhr, status, e) {
-					console.error(status + ":" + e);
-
-				}
-			});
-		});
-	});
-</script>
 <link href="${pageContext.request.contextPath}/css/signup.css"
 	rel="stylesheet" />
 <link
 	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
-	rel="stylesheet" id="bootstrap-css">
+	rel="stylesheet" id="bootstrap-css"/>
+	<script>
+		$(function () { // 빠진 항목 있나 체크
+			$("#btnsend").click(function () {
+				var isRight = true;
+				$("#join-form").find("input[type=text]").each(function (index, item) {
+					// 아무값없이 띄어쓰기만 있을 때도 빈 값으로 체크되도록 trim() 함수 호출
+					if ($(this).val().trim() == '') {
+						alert(" 빠진항목 없이 입력하세요.");
+						isRight = false;
+						return false;
+					}
+				});
+
+				if (!isRight) {
+					return false;
+				}
+
+				$(this).prop("disabled", true);
+				$(this).prop("disabled", false);
+			});
+
+		});
+
+	</script>
+
 <head>
 <title>BitComputer - 내정보수정</title>
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
-<link href="${pageContext.request.contextPath }/assets/css/user.css"
-	rel="stylesheet" type="text/css">
 </head>
 <body>
 	<div id="fullscreen_bg" class="fullscreen_bg">
@@ -140,7 +125,7 @@
 										</div>
 									</div>
 									<!-- 우편번호 -->
-									<button class="btn btn-lg btn-primary btn-block" type="submit">정보수정!!</button>
+									<button class="btn btn-lg btn-primary btn-block" type="submit" id="btnsend">정보수정!!</button>
 									<button class="btn btn-lg btn-primary btn-block" type="button"
 										onclick="location.href='${pageContext.request.contextPath }'">돌아가기</button>
 

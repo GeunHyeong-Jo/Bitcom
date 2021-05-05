@@ -16,8 +16,8 @@
 <link
 	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
 	rel="stylesheet" id="bootstrap-css">
+<script src="${pageContext.request.contextPath }/assets/js/jquery/jquery-3.6.0.js" type="text/javascript"></script>
 </head>
-<body>
 <body>
 	<div id="fullscreen_bg" class="fullscreen_bg">
 		<form class="form-signin" id="join-form" name="joinForm" method="post"

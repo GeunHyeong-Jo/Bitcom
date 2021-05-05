@@ -18,7 +18,7 @@ public class ProductService {
 		List<ProductVo> list = productRepository.findall();
 		return list;
 	}
-
+	
 	public ProductVo getDetail(String pno) {
 		ProductVo vo = productRepository.getDetail(pno);
 		return vo;

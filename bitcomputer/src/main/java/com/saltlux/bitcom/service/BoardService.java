@@ -10,6 +10,7 @@ import com.saltlux.bitcom.repository.BoardRepository;
 @Service
 public class BoardService {
 
+	@SuppressWarnings("unused")
 	@Autowired
 	private BoardRepository boardRepository;
 
